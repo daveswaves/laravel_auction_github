@@ -48,68 +48,13 @@ class ViewsController extends Controller
             $this->years[] = $key;
         }
         
-        $top_nav_dropdown = [];
-        
-        if( !isset($_POST['date_current']) ){
-            $top_nav_dropdown['year_dates'] = $this->dates_sorted[ $this->years[0]];
-            $_POST['date_current'] = $top_nav_dropdown['year_dates'][0];
-        }
-        
-        if( isset($_POST['post_date']) ){
-            if( preg_match("/^\d{4}$/", $_POST['post_date']) ){
-                $top_nav_dropdown['year_dates'] = $this->dates_sorted[ $this->years[$_POST['post_date']]];
-                $_POST['date_current'] = $top_nav_dropdown['year_dates'][0];
-            }
-            elseif( preg_match("/^\d{2}-\d{2}-\d{4}$/", $_POST['post_date']) ){
-                $_POST['date_current'] = $_POST['post_date'];
-            }
-        }
-        
-        $year_current = substr($_POST['date_current'], -4);
-        // Sets the year in the navbar.
-        $top_nav_dropdown['year_current'] = $year_current; // 2021
-        // Sets the date in the navbar.
-        $top_nav_dropdown['date_current'] = $_POST['date_current']; // 29-06-2021
-        // Sets the dropdown years in the navbar.
-        $top_nav_dropdown['years'] = $this->years; // [ 2021, 2020 ]
-        // Sets the dropdown dates in the navbar.
-        $top_nav_dropdown['year_dates'] = $this->dates_sorted[$year_current]; // [ 29-06-2021, 18-05-2021, 20-04-2021 ]
-        
-        
-        $dropdown = [];
-        $dropdown['years'][] = '<select>';
-        foreach( $top_nav_dropdown['years'] as $year ){
-            $dropdown['years'][] = "<option value='$year'>$year</option>";
-        }
-        $dropdown['years'][] = '</select>';
-        
-        $dropdown['year_dates'][] = '<li class="dropdown">';
-        $dropdown['year_dates'][] = '<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">29-06-2021 <span class="caret"></span></a>';
-        $dropdown['year_dates'][] = '<ul class="dropdown-menu">';
-        foreach( $top_nav_dropdown['year_dates'] as $year_date ){
-            $dropdown['year_dates'][] = '<li><a href="http://127.0.0.1:8000/sellers/'.$year_date.'">'.$year_date.'</a></li>';
-        }
-        $dropdown['year_dates'][] = '</ul>';
-        $dropdown['year_dates'][] = '</li>';
-        
-        // $dropdown['year_dates'][] = '<select name="date_current" onchange="this.form.submit()">';
-        // foreach( $top_nav_dropdown['year_dates'] as $year_date ){
-        //     $dropdown['year_dates'][] = "<option value='$year_date'>$year_date</option>";
-        // }
-        // $dropdown['year_dates'][] = '</select>';
-        
-        // This enables dropdowns to be accessed on the layout.blade.php file.
-        view()->share('dd_years', implode('', $dropdown['years']) );
-        view()->share('dd_year_dates', implode('', $dropdown['year_dates']) );
-        
-        // echo '<pre style="background:#111; color:#b5ce28; font-size:11px;">'; print_r($top_nav_dropdown); echo '</pre>'; die(); //DEBUG
         
         // echo '<pre style="background:#111; color:#b5ce28; font-size:11px;">'; print_r( $this->years ); echo '</pre>';
         // echo '<pre style="background:#111; color:#b5ce28; font-size:11px;">'; print_r( $this->dates_sorted ); echo '</pre>'; die();
         // echo '<pre style="background:#111; color:#b5ce28; font-size:11px;">'; print_r( config('user.auction_dates') ); echo '</pre>'; die();
     }
     
-    public function sellers($date)
+    public function sellers()
     {
         // https://laravel.com/docs/9.x/eloquent#retrieving-models
         // $sellers = Seller::all();

@@ -3,11 +3,6 @@
 
 // cd /opt/lampp/htdocs/laravel_auction && php artisan serve
 
-/**
- * Log into Smythes: http://www.smythes.net/user | email: symthes@btinternet.com | password: VE7cbCtwppX6VD
- * 
- */
-
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ViewsController;
@@ -23,5 +18,5 @@ use App\Http\Controllers\ViewsController;
 |
 */
 
-Route::get('/sellers/{date}', [ViewsController::class, 'sellers']);
+Route::get('/', [ViewsController::class, 'sellers']);
 Route::get('/lots/{id}', [ViewsController::class, 'lots']);

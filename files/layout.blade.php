@@ -13,13 +13,7 @@
 <body>
 
 <div class="container">
-    <!-- Can also use blade components as an alternative -->
-    <nav class="navbar fixed nav-full-width">
-        <!-- Dropdown (YEARS) -->
-        {!! $dd_years !!}
-        <!-- Dropdown (AUCTION DATES) -->
-        {!! $dd_year_dates !!}
-    </nav>
+    <nav class="navbar fixed nav-full-width">NAVBAR</nav>
     <div class="h-60px"></div>
     @yield('content')
 </div>
